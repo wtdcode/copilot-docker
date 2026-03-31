@@ -22,8 +22,15 @@ fi
 
 # Create user if it doesn't exist
 if ! id "$USER_NAME" > /dev/null 2>&1; then
-    useradd -m -u "$USER_UID" -g "$USER_GID" -s /usr/bin/fish "$USER_NAME"
+    if [ -d "/home/$USER_NAME" ]; then
+        useradd -u "$USER_UID" -g "$USER_GID" -d "/home/$USER_NAME" -s /usr/bin/fish "$USER_NAME"
+    else
+        useradd -m -u "$USER_UID" -g "$USER_GID" -s /usr/bin/fish "$USER_NAME"
+    fi
 fi
+
+# Ensure home directory ownership (may be a mount point)
+chown "$USER_UID:$USER_GID" "/home/$USER_NAME"
 
 # Ensure sudoers entry
 echo "$USER_NAME ALL=(ALL) NOPASSWD:ALL" > "/etc/sudoers.d/$USER_NAME"
