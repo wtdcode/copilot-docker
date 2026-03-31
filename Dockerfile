@@ -34,6 +34,9 @@ RUN curl -fsSL https://raw.githubusercontent.com/tj/n/master/bin/n -o /usr/local
 RUN npm install -g @github/copilot \
     && chmod -R a+rx /usr/local/lib/node_modules /usr/local/bin
 
+# Copy default config files
+COPY .tmux.conf /etc/skel/.tmux.conf
+
 # Copy entrypoint
 COPY entrypoint.sh /usr/local/bin/entrypoint.sh
 RUN chmod +x /usr/local/bin/entrypoint.sh
