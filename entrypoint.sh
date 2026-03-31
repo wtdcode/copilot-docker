@@ -32,6 +32,10 @@ fi
 # Ensure home directory ownership (may be a mount point)
 chown "$USER_UID:$USER_GID" "/home/$USER_NAME"
 
+# Copy default config files from /etc/skel if missing
+cp -rn /etc/skel/. "/home/$USER_NAME/"
+chown -R "$USER_UID:$USER_GID" "/home/$USER_NAME"
+
 # Ensure sudoers entry
 echo "$USER_NAME ALL=(ALL) NOPASSWD:ALL" > "/etc/sudoers.d/$USER_NAME"
 chmod 0440 "/etc/sudoers.d/$USER_NAME"

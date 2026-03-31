@@ -44,6 +44,8 @@ docker run --rm -it \
 
 The created user has `NOPASSWD:ALL` sudo access and uses `fish` as the default shell.
 
+> **Note:** Do not mount a volume directly to `$HOME` (e.g., `-v /host/path:/home/mio`). Instead, mount subdirectories (e.g., `-v ~/.copilot:/home/mio/.copilot`). The entrypoint copies default config files (like `.tmux.conf`) into `$HOME` at startup, which would fail if the entire home directory is an external mount.
+
 ## Build locally
 
 ```bash
