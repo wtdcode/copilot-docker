@@ -1,0 +1,18 @@
+{
+  "hooks": {
+    "agentStop": [
+      {
+        "type": "command",
+        "command": "command -v copilot-tg-notify >/dev/null && copilot-tg-notify agentStop || true",
+        "timeout": 30
+      }
+    ],
+    "sessionEnd": [
+      {
+        "type": "command",
+        "command": "command -v copilot-tg-notify >/dev/null && copilot-tg-notify sessionEnd || true",
+        "timeout": 30
+      }
+    ]
+  }
+}

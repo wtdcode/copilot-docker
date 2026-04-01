@@ -33,7 +33,18 @@ fi
 chown "$USER_UID:$USER_GID" "/home/$USER_NAME"
 
 # Copy default config files from /etc/skel if missing
-cp -rn /etc/skel/. "/home/$USER_NAME/"
+cp -r --update=none /etc/skel/. "/home/$USER_NAME/"
+
+# Configure telegram-send if BOT_TOKEN and ADMIN_ID are set
+if [ -n "$BOT_TOKEN" ] && [ -n "$ADMIN_ID" ]; then
+    mkdir -p "/home/$USER_NAME/.config"
+    cat > "/home/$USER_NAME/.config/telegram-send.conf" <<EOF
+[telegram]
+token = $BOT_TOKEN
+chat_id = $ADMIN_ID
+EOF
+fi
+
 chown -R "$USER_UID:$USER_GID" "/home/$USER_NAME"
 
 # Ensure sudoers entry
