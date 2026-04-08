@@ -2,7 +2,7 @@ name: Build and Push Docker Image
 
 on:
   schedule:
-    - cron: '0 0 */7 * *'
+    - cron: '0 0 */3 * *'
   push:
     branches: [master]
   workflow_dispatch:
@@ -28,4 +28,4 @@ jobs:
         with:
           context: .
           push: true
-          tags: lazymio/copilot:latest
+          tags: lazymio/vibe:latest
