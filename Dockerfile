@@ -23,6 +23,8 @@ RUN apt-get update && apt-get install -y \
 # Generate locale
 RUN locale-gen en_US.UTF-8
 ENV LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8
+# Enable claude tui support
+ENV CLAUDE_CODE_NO_FLICKER=1
 
 # Install latest n (Node version manager) and latest Node/npm
 RUN curl -fsSL https://raw.githubusercontent.com/tj/n/master/bin/n -o /usr/local/bin/n \
